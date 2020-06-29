@@ -32,3 +32,9 @@ user associations
 // take inputted password and compare to hashed password in user table
 // remove password setup before add
 // return user model
+
+// import filesystem
+// import path
+// initialize orm layer
+// import env variables
+// initialize db variable

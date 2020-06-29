@@ -1,1 +1,1 @@
-// handle db connections / middleware for apps
+'use strict'
