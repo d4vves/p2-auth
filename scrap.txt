@@ -1,6 +1,15 @@
 // configure dotenv
+npm i dotenv
 // require express and set up an express app instance
+npm i express
 // require and set view engine using ejs
+npm i ejs express-ejs-layouts
 // set app to use false urlencoding
 // set app public directory for use
 // set app ejs layouts for render
+
+//auth middleware
+npm i helmet
+npm i morgan
+npm i express-session
+npm i flash
