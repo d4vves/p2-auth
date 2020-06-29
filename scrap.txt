@@ -1,0 +1,6 @@
+// configure dotenv
+// require express and set up an express app instance
+// require and set view engine using ejs
+// set app to use false urlencoding
+// set app public directory for use
+// set app ejs layouts for render
