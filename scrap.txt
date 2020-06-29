@@ -13,3 +13,22 @@ npm i helmet
 npm i morgan
 npm i express-session
 npm i flash
+
+//db
+// define use case
+use strict
+// import any required libraries
+npm i bcrypt
+// declare user model format
+  define user object
+    email
+    name
+    password
+hook
+  before new record
+    hash password
+user associations
+// hash new password to add to user table
+// take inputted password and compare to hashed password in user table
+// remove password setup before add
+// return user model
