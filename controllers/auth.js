@@ -38,27 +38,30 @@ router.get('/login', (req, res) => {
     res.render('auth/login')
 })
 
-router.post('/login', (req, res) => {
+router.post('/login', (req, res, next) => {
     passport.authenticate('local', (error, user, info) => {
         if (!user) {
             req.flash('error', 'Invalid username or password.')
-            // save to our use session no username
-            //redirect our user to try logging in again
+            req.session.save(() => {
+                return res.redirect('auth/login')
+            })
         }
         if (error) {
-            return error
+            return next(error)
         }
         req.login((user, error) => {
-            // if error move to error
-            // if success flash success
-            // if success save session and redirect
+            if (error) next(error)
+            req.flash('success', 'You are validated and logged in.')
+            req.session.save(() => {
+                return res.redirect('/')
+            })
         })
     })
 })
 
 router.post('/login', passport.authenticate('local', {
     successRedirect: '/',
-    failureRedirect: '/auth/login',
+    failureRedirect: 'auth/login',
     successFlash: 'Welcome to our app!',
     failureFlash: 'Invalid username or password.'
 }))
