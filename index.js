@@ -7,6 +7,7 @@ const session = require('express-session')
 const flash = require('flash')
 const passport = require('./config/ppConfig')
 const db = require('./models')
+const isLoggedIn = require('./middleware/isLoggedIn')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 
 /*----- app Setup -----*/
@@ -46,6 +47,10 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
     // check to see if user is logged in
     res.render('index')
+})
+
+app.get('/profile', isLoggedIn, (req, res) => {
+    res.render('profile')
 })
 
 /*----- Controllers -----*/
