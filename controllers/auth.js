@@ -25,12 +25,12 @@ router.post('/register', (req, res) => {
         } else {
             console.log(`👎 User email exists. 👎`)
             req.flash('error', 'Email already exists. Please try again.')
-            res.redirect('auth/register')
+            res.redirect('/auth/register')
         }
     }).catch((err) => {
         console.log(`🚦 ${err.message}\n${err} 🚦`)
         req.flash('error', err.message)
-        res.redirect('auth/register')
+        res.redirect('/auth/register')
     })
 })
 
@@ -43,7 +43,7 @@ router.post('/login', (req, res, next) => {
         if (!user) {
             req.flash('error', 'Invalid username or password.')
             req.session.save(() => {
-                return res.redirect('auth/login')
+                return res.redirect('/auth/login')
             })
         }
         if (error) {
