@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const db = require('../models')
-const flash = require('flash')
+const flash = require('connect-flash')
 const passport = require('../config/ppConfig')
 
 router.get('/register', (req, res) => {
@@ -51,7 +51,7 @@ router.post('/login', (req, res, next) => {
         }
         req.login(user, (error) => {
             if (error) next(error)
-            req.flash('success', 'You are validated and logged in.')
+            req.flash('success', `Welcome ${user.name}`)
             req.session.save(() => {
                 return res.redirect('/profile')
             })
