@@ -19,9 +19,11 @@ router.post('/register', (req, res) => {
         }
     }).then(([user, created]) => {
         if (created) {
-            // auth
             console.log(`🤘 User created. 🤘`)
-            res.redirect('/')
+            passport.authenticate('local', {
+                successRedirect: '/profile',
+                successFlash: 'Thanks for signing up!'
+            })(req, res)
         } else {
             console.log(`👎 User email exists. 👎`)
             req.flash('error', 'Email already exists. Please try again.')
@@ -49,14 +51,14 @@ router.post('/login', (req, res, next) => {
         if (error) {
             return next(error)
         }
-        req.login((user, error) => {
+        req.login(user, (error) => {
             if (error) next(error)
             req.flash('success', 'You are validated and logged in.')
             req.session.save(() => {
-                return res.redirect('/')
+                return res.redirect('/profile')
             })
         })
-    })
+    })(req, res, next)
 })
 
 router.post('/login', passport.authenticate('local', {

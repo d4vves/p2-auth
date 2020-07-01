@@ -38,7 +38,7 @@ app.use(passport.session())
 app.use(flash())
 
 app.use((req, res, next) => {
-    res.locals.alert = req.flash()
+    res.locals.alerts = req.flash()
     res.locals.currentUser = req.user
     next()
 })
